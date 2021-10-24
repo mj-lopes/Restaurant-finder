@@ -6,10 +6,12 @@ import { Container, Search, Wrapper, CarouselTitle, Carousel } from "./styles";
 
 import logo from "../../assets/logo.svg";
 import restaurante from "../../assets/restaurante-fake.png";
-import { ImageCard } from "../../components";
+import { ImageCard, RestaurantCard } from "../../components";
+import Modal from "../../components/Modal";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
+  const [modalOpened, setModalOpened] = useState(false);
 
   const carrouselSetting = {
     dots: false,
@@ -18,10 +20,12 @@ const Home = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
+    arrows: false,
   };
 
   return (
     <Wrapper>
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
       <Container>
         <Search>
           <h1>
@@ -51,6 +55,7 @@ const Home = () => {
           <ImageCard photo={restaurante} />
           <ImageCard photo={restaurante} />
         </Carousel>
+        <RestaurantCard />
       </Container>
     </Wrapper>
   );
