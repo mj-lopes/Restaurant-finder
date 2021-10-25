@@ -6,11 +6,12 @@ import { Container, Search, Wrapper, CarouselTitle, Carousel } from "./styles";
 
 import logo from "../../assets/logo.svg";
 import restaurante from "../../assets/restaurante-fake.png";
-import { ImageCard, RestaurantCard } from "../../components";
+import { ImageCard, Map, RestaurantCard } from "../../components";
 import Modal from "../../components/Modal";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
+  const [query, setQuery] = useState();
   const [modalOpened, setModalOpened] = useState(false);
 
   const carrouselSetting = {
@@ -22,6 +23,12 @@ const Home = () => {
     adaptiveHeight: true,
     arrows: false,
   };
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      setQuery(inputValue);
+    }
+  }
 
   return (
     <Wrapper>
@@ -40,6 +47,7 @@ const Home = () => {
             <Input
               value={inputValue}
               onChange={({ target }) => setInputValue(target.value)}
+              onKeyPress={handleKeyPress}
             />
           </TextField>
         </Search>
@@ -57,6 +65,7 @@ const Home = () => {
         </Carousel>
         <RestaurantCard />
       </Container>
+      <Map query={query} />
     </Wrapper>
   );
 };
