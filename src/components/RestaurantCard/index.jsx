@@ -3,6 +3,31 @@ import Stars from "react-rating-stars-component";
 
 import restaurante from "../../assets/restaurante-fake.png";
 
+export const RestaurantCard = ({ restaurant }) => {
+  if (!restaurant) return null;
+  return (
+    <Restaurant>
+      <RestaurantInfo>
+        <RestaurantTitle>{restaurant.name}</RestaurantTitle>
+        <Stars
+          count={5}
+          value={restaurant.rating}
+          edit={false}
+          isHalf
+          activeColor={"#E7711C"}
+        />
+        <RestaurantAddress>
+          {restaurant.vicinity || restaurant.formatted_address}
+        </RestaurantAddress>
+      </RestaurantInfo>
+      <RestaurantPhoto
+        src={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
+        alt={"foto do restaurante"}
+      ></RestaurantPhoto>
+    </Restaurant>
+  );
+};
+
 const Restaurant = styled.div`
   display: flex;
   justify-content: space-between;
@@ -54,25 +79,3 @@ const RestaurantPhoto = styled.img`
   display: block;
   border-radius: 12px;
 `;
-
-export const RestaurantCard = () => (
-  <Restaurant>
-    <RestaurantInfo>
-      <RestaurantTitle>Casa de Noca Pizzaria</RestaurantTitle>
-      <Stars
-        count={5}
-        value={4.5}
-        edit={false}
-        isHalf
-        activeColor={"#E7711C"}
-      />
-      <RestaurantAddress>
-        Local Da casa da Pqp na rua da miseria futuro esquecido
-      </RestaurantAddress>
-    </RestaurantInfo>
-    <RestaurantPhoto
-      src={restaurante}
-      alt={"foto do restaurante"}
-    ></RestaurantPhoto>
-  </Restaurant>
-);

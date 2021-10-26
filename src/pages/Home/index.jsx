@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
 
@@ -11,13 +12,15 @@ import Modal from "../../components/Modal";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("");
   const [modalOpened, setModalOpened] = useState(false);
+  const { restaurants } = useSelector((state) => state.restaurants);
 
   const carrouselSetting = {
     dots: false,
     infinite: true,
     speed: 300,
+    autoplay: true,
     slidesToShow: 4,
     slidesToScroll: 4,
     adaptiveHeight: true,
@@ -53,17 +56,19 @@ const Home = () => {
         </Search>
         <CarouselTitle>Na sua Área</CarouselTitle>
         <Carousel {...carrouselSetting}>
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
-          <ImageCard photo={restaurante} />
+          {restaurants.map((restaurant) => (
+            <ImageCard
+              key={restaurant.place_id}
+              photo={
+                restaurant.photos ? restaurant.photos[0].getUrl() : restaurante
+              }
+              name={restaurant.name}
+            />
+          ))}
         </Carousel>
-        <RestaurantCard />
+        {restaurants.map((restaurant) => (
+          <RestaurantCard key={restaurant.place_id} restaurant={restaurant} />
+        ))}
       </Container>
       <Map query={query} />
     </Wrapper>
