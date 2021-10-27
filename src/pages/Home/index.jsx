@@ -21,7 +21,7 @@ import {
   Map,
   RestaurantCard,
   Skeleton,
-  Modal
+  Modal,
 } from "../../components/index";
 
 const Home = () => {
