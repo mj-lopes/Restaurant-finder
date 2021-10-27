@@ -99,6 +99,12 @@ export const MapContainer = (props) => {
       centerAroundCurrentLocation
       onReady={onMapReady}
       onRecenter={onMapReady}
+      containerStyle={{
+        width: "73vw",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+      style={{ width: "73vw", height: "100vh" }}
       zoom={15}
     >
       {restaurants.map((restaurant) => (

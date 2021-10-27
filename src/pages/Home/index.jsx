@@ -132,7 +132,7 @@ const Home = () => {
             />
           </TextField>
         </Search>
-        {hasRestaurantList()};
+        {hasRestaurantList()}
       </Container>
       <Map query={query} placeId={placeId} />
     </Wrapper>
