@@ -5,7 +5,7 @@ import Stars from "react-rating-stars-component";
 import restaurante from "../../assets/restaurante-fake.png";
 import { Skeleton } from "..";
 
-export const RestaurantCard = ({ restaurant, onClick }) => {
+const RestaurantCard = ({ restaurant, onClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   if (!restaurant) return null;
@@ -35,6 +35,8 @@ export const RestaurantCard = ({ restaurant, onClick }) => {
     </Restaurant>
   );
 };
+
+export default RestaurantCard;
 
 const Restaurant = styled.div`
   display: flex;
