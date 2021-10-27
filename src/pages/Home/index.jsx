@@ -21,8 +21,8 @@ import {
   Map,
   RestaurantCard,
   Skeleton,
-} from "../../components";
-import Modal from "../../components/Modal";
+  Modal,
+} from "../../components/index";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
