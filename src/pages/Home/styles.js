@@ -41,3 +41,20 @@ export const CarouselTitle = styled.h2`
   line-height: 1.4;
   background-color: white;
 `;
+
+export const ModalTitle = styled.p`
+  margin-bottom: 1rem;
+  letter-spacing: 0.1px;
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.color.text};
+  line-height: 1.1;
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+
+export const ModalContent = styled(ModalTitle)`
+  margin-bottom: 0.25rem;
+  font-weight: normal;
+  line-height: 1.4;
+  font-size: 1rem;
+`;

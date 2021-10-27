@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Skeleton } from "..";
 
 const Card = styled.div`
   width: 90px;
@@ -47,8 +48,24 @@ const Title = styled.p`
   }
 `;
 
-export const ImageCard = ({ photo }) => (
-  <Card photo={photo}>
-    <Title>Nome do Restaurante</Title>
-  </Card>
-);
+export const ImageCard = ({ photo, name }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const imageLoader = new Image();
+    imageLoader.src = photo;
+    imageLoader.onload = () => setImageLoaded(true);
+  }, [photo]);
+
+  return (
+    <>
+      {imageLoaded ? (
+        <Card photo={photo}>
+          <Title>{name}</Title>
+        </Card>
+      ) : (
+        <Skeleton width="90px" height="90px" />
+      )}
+    </>
+  );
+};
