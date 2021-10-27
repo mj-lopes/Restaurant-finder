@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "node_modules": true,
+    ".babelrc": true,
+    ".editorconfig": true,
+    ".eslintignore": true,
+    ".eslintrc": true,
+    "jsconfig.json":true,
+    ".gitignore": true,
+    "package.json": true,
+    "package-lock.json": true,
+    "prettier.config.js": true,
+    ".vscode": true
+  }
+}
