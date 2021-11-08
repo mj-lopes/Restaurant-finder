@@ -134,7 +134,7 @@ const Home = () => {
         </Search>
         {hasRestaurantList()}
       </Container>
-      <Map query={query} placeId={placeId} />
+      <Map query={query} placeId={placeId} onClick={handleOpenModal} />
     </Wrapper>
   );
 };
