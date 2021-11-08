@@ -1,9 +1,9 @@
-import ImageCard from "./ImageCard";
-import RestaurantCard from "./RestaurantCard";
-import Modal from "./Modal";
-import Map from "./Map";
-import Loader from "./Loader";
-import Skeleton from "./Skeleton";
+export * from "./ImageCard";
+export * from "./Loader";
+export { default as Map } from "./Map";
+export * from "./Modal";
+export * from "./RestaurantCard";
+export * from "./Skeleton";
 
 // export { default as ImageCard } from "./ImageCard";
 // export { default as RestaurantCard } from "./RestaurantCard";
@@ -11,5 +11,3 @@ import Skeleton from "./Skeleton";
 // export { default as Map } from "./Map";
 // export { default as Loader } from "./Loader";
 // export { default as Skeleton } from "./Skeleton";
-
-export { ImageCard, RestaurantCard, Modal, Map, Loader, Skeleton };

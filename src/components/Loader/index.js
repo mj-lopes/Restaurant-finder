@@ -12,8 +12,6 @@ const defaultOptions = {
   },
 };
 
-const Loader = () => {
+export const Loader = () => {
   return <Lottie options={defaultOptions} />;
 };
-
-export default Loader;
