@@ -7,7 +7,7 @@ import {
   setRestaurantSelected,
 } from "../../redux/modules/restaurants";
 
-export const MapContainer = (props) => {
+const MapContainer = (props) => {
   const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const { restaurants } = useSelector((state) => state.restaurants);

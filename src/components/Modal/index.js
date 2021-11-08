@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Portal from "./Portal";
 
-const Modal = ({ children, open, onClose }) => {
+export const Modal = ({ children, open, onClose }) => {
   useEffect(() => {
     function onEsc(e) {
       if (e.keyCode === 27) onClose();
@@ -65,5 +65,3 @@ const InfoModal = styled.div`
   box-shadow: 0 0 32px rgba(78, 89, 131, 0.2);
   border-radius: 8px;
 `;
-
-export default Modal;
