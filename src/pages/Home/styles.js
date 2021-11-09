@@ -8,8 +8,8 @@ export const Wrapper = styled.main`
 `;
 
 export const Container = styled.aside`
-  width: 360px;
-  height: 100vh;
+  width: 25vw;
+  max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem;
