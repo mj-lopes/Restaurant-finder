@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoBox,
+} from "@react-google-maps/api";
 
 import {
   setRestaurants,
@@ -128,9 +133,11 @@ const Map = ({ query, placeId, onClick }) => {
       zoom={15}
       center={center}
       onLoad={onLoad}
+      clickableIcons={false}
     >
       {restaurants.map((restaurant) => (
         <Marker
+          title={restaurant.name}
           key={restaurant.place_id}
           name={restaurant.name}
           onClick={() => onClick(restaurant.place_id)}
