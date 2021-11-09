@@ -1,21 +1,33 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoBox,
+} from "@react-google-maps/api";
 
 import {
   setRestaurants,
   setRestaurantSelected,
 } from "../../redux/modules/restaurants";
 
-const MapContainer = (props) => {
+const libraries = ["places"];
+const containerStyle = {
+  width: "100%",
+  height: "100vh",
+};
+
+let center = {};
+
+const Map = ({ query, placeId, onClick }) => {
   const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const { restaurants } = useSelector((state) => state.restaurants);
-  const { google, query, placeId, onClick } = props;
 
   const searchByQuery = useCallback(
     (map, query) => {
-      const service = new google.maps.places.PlacesService(map);
+      const service = new window.google.maps.places.PlacesService(map);
       dispatch(setRestaurants([]));
 
       const request = {
@@ -26,17 +38,17 @@ const MapContainer = (props) => {
       };
 
       service.textSearch(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           dispatch(setRestaurants(results));
         }
       });
     },
-    [dispatch, google],
+    [dispatch],
   );
 
   const getDetails = useCallback(
     (placeId) => {
-      const service = new google.maps.places.PlacesService(map);
+      const service = new window.google.maps.places.PlacesService(map);
       dispatch(setRestaurantSelected(null));
 
       const request = {
@@ -50,13 +62,28 @@ const MapContainer = (props) => {
       };
 
       service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           dispatch(setRestaurantSelected(place));
         }
       });
     },
-    [google, map, dispatch],
+    [map, dispatch],
   );
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const { latitude, longitude } = coords;
+        center = { lat: latitude, lng: longitude };
+      },
+      () => {
+        center = {
+          lat: -18.07101074,
+          lng: -39.559004,
+        };
+      },
+    );
+  }, []);
 
   useEffect(() => {
     if (query) {
@@ -70,8 +97,15 @@ const MapContainer = (props) => {
     }
   }, [placeId, getDetails]);
 
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    language: "pt-BR",
+    libraries: libraries,
+  });
+
   const searchNearby = (map, center) => {
-    const service = new google.maps.places.PlacesService(map);
+    const service = new window.google.maps.places.PlacesService(map);
 
     const request = {
       location: center,
@@ -80,7 +114,7 @@ const MapContainer = (props) => {
     };
 
     service.nearbySearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         dispatch(setRestaurants(results));
       } else {
         console.log(status);
@@ -88,27 +122,22 @@ const MapContainer = (props) => {
     });
   };
 
-  function onMapReady(_, map) {
+  function onLoad(map) {
     setMap(map);
     searchNearby(map, map.center);
   }
 
-  return (
-    <Map
-      google={google}
-      centerAroundCurrentLocation
-      onReady={onMapReady}
-      onRecenter={onMapReady}
-      containerStyle={{
-        width: "73vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-      style={{ width: "73vw", height: "100vh" }}
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
       zoom={15}
+      center={center}
+      onLoad={onLoad}
+      clickableIcons={false}
     >
       {restaurants.map((restaurant) => (
         <Marker
+          title={restaurant.name}
           key={restaurant.place_id}
           name={restaurant.name}
           onClick={() => onClick(restaurant.place_id)}
@@ -118,11 +147,10 @@ const MapContainer = (props) => {
           }}
         />
       ))}
-    </Map>
+    </GoogleMap>
+  ) : (
+    <></>
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  language: "pt-BR",
-})(MapContainer);
+export default Map;
