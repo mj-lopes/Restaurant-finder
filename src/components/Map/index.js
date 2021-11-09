@@ -7,39 +7,50 @@ import {
   setRestaurantSelected,
 } from "../../redux/modules/restaurants";
 
+const libraries = ["places"];
+const containerStyle = {
+  width: "75vw",
+  height: "100vh",
+};
+
+let center = {};
+
 const Map = ({ query, placeId, onClick }) => {
   const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const { restaurants } = useSelector((state) => state.restaurants);
 
-  const containerStyle = {
-    width: "75vw",
-    height: "100vh",
-  };
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const { latitude, longitude } = coords;
+        center = { lat: latitude, lng: longitude };
+      },
+      () => {
+        center = {
+          lat: -18.07101074,
+          lng: -39.559004,
+        };
+      },
+    );
+  }, []);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     language: "pt-BR",
-    libraries: ["places"],
+    libraries: libraries,
   });
 
   const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
     setMap(map);
     console.log(map);
   }, []);
 
-  const center = {
-    lat: -18.07101074,
-    lng: -39.559004,
-  };
-
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      zoom={14}
+      zoom={15}
       onLoad={onLoad}
       center={center}
     >
