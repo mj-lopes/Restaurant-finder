@@ -5,6 +5,11 @@ export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   background-color: ${(props) => props.theme.color.background};
+  &::-webkit-scrollbar-thumb {
+    background-color: blue; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid orange; /* creates padding around scroll thumb */
+  }
 `;
 
 export const Container = styled.aside`
@@ -15,6 +20,19 @@ export const Container = styled.aside`
   overflow-x: hidden;
   padding: 1rem;
   background-color: white;
+
+  ::-webkit-scrollbar-thumb {
+    background: #6200ee;
+    border-radius: 8px;
+    border: 2px solid #fff;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fff;
+  }
 `;
 
 export const Search = styled.section`
