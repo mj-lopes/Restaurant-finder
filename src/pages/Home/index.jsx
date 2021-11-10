@@ -15,6 +15,7 @@ import {
 
 import logo from "../../assets/logo.svg";
 import restaurante from "../../assets/restaurante-fake.png";
+
 import {
   ImageCard,
   Loader,
@@ -22,7 +23,14 @@ import {
   RestaurantCard,
   Skeleton,
   Modal,
-} from "../../components/index";
+} from "../../components";
+
+// import { ImageCard } from "../../components/ImageCard";
+// import { Loader } from "../../components/Loader";
+// import Map from "../../components/Map";
+// import { RestaurantCard } from "../../components/RestaurantCard";
+// import { Skeleton } from "../../components/Skeleton";
+// import { Modal } from "../../components/Modal";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");

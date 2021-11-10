@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  Marker,
-  InfoBox,
-} from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
 import {
   setRestaurants,
@@ -78,8 +73,8 @@ const Map = ({ query, placeId, onClick }) => {
       },
       () => {
         center = {
-          lat: -18.07101074,
-          lng: -39.559004,
+          lat: -23.533773,
+          lng: -46.62529,
         };
       },
     );
