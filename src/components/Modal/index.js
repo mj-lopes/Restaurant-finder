@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Portal from "./Portal";
 
-export const Modal = ({ children, open, onClose }) => {
+const Modal = ({ children, open, onClose }) => {
   useEffect(() => {
     function onEsc(e) {
       if (e.keyCode === 27) onClose();
@@ -33,6 +33,8 @@ export const Modal = ({ children, open, onClose }) => {
     </Portal>
   );
 };
+
+export default Modal;
 
 const Overlay = styled.div`
   position: fixed;
