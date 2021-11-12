@@ -14,8 +14,7 @@ RF é uma aplicação web para a realização de buscas de restaurantes/lanchone
  <a href="#instalacao">Instalação</a> •
  <a href="#funcionando">Funcionando</a> •
  <a href="#tecnologias">Tecnologias</a> •   
- <a href="#autor">Autor</a> •
- <a href="#licenc-a">Licença</a> 
+ <a href="#autor">Autor</a> 
 </p>
 
 <h2> Features 🥘</h2>
@@ -92,6 +91,10 @@ As seguintes ferramentas foram usadas na construção deste projeto:
 - [Redux](https://react-redux.js.org/)
 - [Styled Components](https://styled-components.com/)
 
+<h2> TODO? 📝 </h2>
+
+- [x] Troca da lib do Maps
+- [ ] Layout responsivo
 
 <h2 id='autor'> Autor </h2>
 
