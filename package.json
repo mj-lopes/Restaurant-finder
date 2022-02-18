@@ -1,6 +1,6 @@
 {
-  "name": "dio-projeto-final",
-  "version": "0.1.0",
+  "name": "Restaurant-finder",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.6",
